@@ -57,8 +57,32 @@ public static void main(String[] args) {
 
 
 // 问题3 设计一个 JSON 序列化算法，支持 Date, Buffer 等类型属性
-var jsObject = new Object();
-jsObject.Date = "2018/3/7";
-jsObject.Buffer = "123";
-var jsonString = JSON.stringify(jsObject);
-console.log(jsonString);
+const json = {
+    string: 'hello world',
+    number: 100,
+    date: new Date(),
+    // buf: new Buffer('hello world')
+};
+
+function encode(jsObject) {
+    return JSON.stringify(jsObject);
+}
+
+function decode(jsonStr) {
+    var jsObject = JSON.parse(jsonStr);
+    for (var key in jsObject) {
+        var value = jsObject[key];
+        // console.log(value);
+        // 2018-03-07T10:52:51.471Z
+        if (typeof value === "string" && value.match(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z$/)) {
+            jsObject[key] = new Date(value);
+            console.log(jsObject[key]);
+        }
+    }
+    return jsObject;
+}
+
+const jsonStr = encode(json);
+const obj = decode(jsonStr);
+console.log(jsonStr);
+console.log(obj);
