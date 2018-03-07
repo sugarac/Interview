@@ -12,7 +12,10 @@ console.log(getValue("man")); // output: "not woman"
 console.log(getValue("constructor")); // output: undefined
 
 
-// 问题2 实现一个带权重的随机算法，输入 n 个数字以及它们对应的权重，输出其中 m 个。注意：要求时间复杂度为 O(m)，空间复杂度也为 O(m)
+实现一个带权重的随机算法，输入 n 个数字以及它们对应的权重，输出其中 m 个。注意：要求时间复杂度为 O(n)，空间复杂度为 O(m)
+比如： 值是 [1, 2, 3, 4, 5, 6]，权重是  [10, 5, 3, 10, 7, 8]，n = 6，m = 2
+输出：1, 4
+
 public void printM(int[][] nums, int m) { 
     int n = nums.length;
     for (int i = 1; i < n; i++) {
