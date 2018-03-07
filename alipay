@@ -1,0 +1,61 @@
+// 问题1 创建一个无原型的对象
+var dict = Object.create(null, {
+    man: { value: "not woman" }
+});
+
+function getValue(word) {
+    return dict[word];
+}
+
+console.log(getValue("man")); // output: "not woman"
+
+console.log(getValue("constructor")); // output: undefined
+
+
+// 问题2 实现一个带权重的随机算法，输入 n 个数字以及它们对应的权重，输出其中 m 个。注意：要求时间复杂度为 O(m)，空间复杂度也为 O(m)
+public void printM(int[][] nums, int m) { 
+    int n = nums.length;
+    for (int i = 1; i < n; i++) {
+        nums[i][1] += nums[i - 1][1];
+    }
+    Random rand = new Random();
+    for (int i = 0; i < m; i++) {
+        int randNum = rand.nextInt(nums[n - 1][1]);
+        System.out.println(randNum);
+        System.out.println(binarySearch(nums, randNum));
+    }
+}
+
+private int binarySearch(int[][] nums, int target) {
+    int start = 0;
+    int end = nums.length;
+    while (start + 1 < end) {
+        int mid = start + (end - start) / 2;
+        if (nums[mid][1] >= target) {
+            end = mid;
+        } else {
+            start = mid;
+        }
+    }
+    if (nums[start][1] >= target) {
+        return nums[start][0];
+    }
+    if (nums[end][1] >= target) {
+        return nums[end][0];
+    }
+    return -1;
+}
+
+public static void main(String[] args) {
+    Alipay test = new Alipay();
+    int[][] nums = {{1, 10}, {2, 5}, {3, 3}, {4, 10}, {5, 7}, {6, 8}};
+    test.printM(nums, 2);
+}
+
+
+// 问题3 设计一个 JSON 序列化算法，支持 Date, Buffer 等类型属性
+var jsObject = new Object();
+jsObject.Date = "2018/3/7";
+jsObject.Buffer = "123";
+var jsonString = JSON.stringify(jsObject);
+console.log(jsonString);
